@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui;
+  --animate-float: float 10s ease-in-out infinite;
+  --animate-float-delayed: float 12s ease-in-out 5s infinite;
+  --animate-pulse-slow: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .glass {
+    @apply bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.5)];
   }
+  
+  .glass-card {
+    @apply bg-gradient-to-br from-white/70 to-white/30 dark:from-slate-900/80 dark:to-slate-950/60 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 rounded-3xl shadow-[0_4px_24px_0_rgba(0,0,0,0.05)] dark:shadow-[0_4px_24px_0_rgba(0,0,0,0.4)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_0_rgba(0,0,0,0.1)] dark:hover:shadow-[0_16px_40px_0_rgba(56,189,248,0.15)] hover:border-cyan-500/40 dark:hover:border-cyan-500/40;
+  }
+
+  .liquid-blob {
+    @apply absolute rounded-full opacity-40 dark:opacity-50 blur-3xl pointer-events-none;
+    animation: float 14s ease-in-out infinite;
+    will-change: transform;
+  }
+  
+  .glow-cyan {
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+  }
+  
+  .glow-purple {
+    box-shadow: 0 0 25px rgba(147, 51, 234, 0.4);
+  }
+}
+
+@keyframes float {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(25px, -35px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+.dark {
+  --background: #020617; /* Deep Midnight Obsidian */
+  --foreground: #f8fafc;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(2, 6, 23, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.6);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
