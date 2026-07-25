@@ -75,138 +75,120 @@ const pushToCloud = async (key: string, data: any) => {
   }
 };
 
-export const getStoredProfile = (): ProfileData => {
-  if (typeof window === "undefined") return initialProfile;
+// Clear stale device-level local storage overrides if present
+if (typeof window !== "undefined") {
   try {
-    const data = localStorage.getItem(KEYS.PROFILE);
-    return data ? JSON.parse(data) : initialProfile;
+    localStorage.removeItem(KEYS.PROFILE);
+    localStorage.removeItem(KEYS.PROJECTS);
+    localStorage.removeItem(KEYS.CERTIFICATES);
+    localStorage.removeItem(KEYS.DOCUMENTATION);
+    localStorage.removeItem(KEYS.SKILLS);
+    localStorage.removeItem(KEYS.SOCIAL);
+    localStorage.removeItem(KEYS.TIMELINE);
   } catch {
-    return initialProfile;
+    // Ignore
   }
+}
+
+export const getStoredProfile = (): ProfileData => {
+  return initialProfile;
 };
 
 export const setStoredProfile = (profile: ProfileData) => {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(KEYS.PROFILE, JSON.stringify(profile));
+  Object.assign(initialProfile, profile);
   pushToCloud("profile", profile);
-  window.dispatchEvent(new Event("portfolio-data-changed"));
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("portfolio-data-changed"));
+  }
 };
 
 export const getStoredProjects = (): ProjectItem[] => {
-  if (typeof window === "undefined") return initialProjects;
-  try {
-    const data = localStorage.getItem(KEYS.PROJECTS);
-    return data ? JSON.parse(data) : initialProjects;
-  } catch {
-    return initialProjects;
-  }
+  return initialProjects;
 };
 
 export const setStoredProjects = (projects: ProjectItem[]) => {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(KEYS.PROJECTS, JSON.stringify(projects));
+  initialProjects.length = 0;
+  initialProjects.push(...projects);
   pushToCloud("projects", projects);
-  window.dispatchEvent(new Event("portfolio-data-changed"));
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("portfolio-data-changed"));
+  }
 };
 
 export const getStoredCertificates = (): CertificateItem[] => {
-  if (typeof window === "undefined") return initialCertificates;
-  try {
-    const data = localStorage.getItem(KEYS.CERTIFICATES);
-    return data ? JSON.parse(data) : initialCertificates;
-  } catch {
-    return initialCertificates;
-  }
+  return initialCertificates;
 };
 
 export const setStoredCertificates = (certs: CertificateItem[]) => {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(KEYS.CERTIFICATES, JSON.stringify(certs));
+  initialCertificates.length = 0;
+  initialCertificates.push(...certs);
   pushToCloud("certificates", certs);
-  window.dispatchEvent(new Event("portfolio-data-changed"));
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("portfolio-data-changed"));
+  }
 };
 
 export const getStoredDocumentation = (): DocumentationItem[] => {
-  if (typeof window === "undefined") return initialDocumentation;
-  try {
-    const data = localStorage.getItem(KEYS.DOCUMENTATION);
-    return data ? JSON.parse(data) : initialDocumentation;
-  } catch {
-    return initialDocumentation;
-  }
+  return initialDocumentation;
 };
 
 export const setStoredDocumentation = (docs: DocumentationItem[]) => {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(KEYS.DOCUMENTATION, JSON.stringify(docs));
+  initialDocumentation.length = 0;
+  initialDocumentation.push(...docs);
   pushToCloud("documentation", docs);
-  window.dispatchEvent(new Event("portfolio-data-changed"));
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("portfolio-data-changed"));
+  }
 };
 
 export const getStoredSkills = (): SkillItem[] => {
-  if (typeof window === "undefined") return initialSkills;
-  try {
-    const data = localStorage.getItem(KEYS.SKILLS);
-    return data ? JSON.parse(data) : initialSkills;
-  } catch {
-    return initialSkills;
-  }
+  return initialSkills;
 };
 
 export const setStoredSkills = (skills: SkillItem[]) => {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(KEYS.SKILLS, JSON.stringify(skills));
+  initialSkills.length = 0;
+  initialSkills.push(...skills);
   pushToCloud("skills", skills);
-  window.dispatchEvent(new Event("portfolio-data-changed"));
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("portfolio-data-changed"));
+  }
 };
 
 export const getStoredSocialLinks = (): SocialLink[] => {
-  if (typeof window === "undefined") return initialSocialLinks;
-  try {
-    const data = localStorage.getItem(KEYS.SOCIAL);
-    return data ? JSON.parse(data) : initialSocialLinks;
-  } catch {
-    return initialSocialLinks;
-  }
+  return initialSocialLinks;
 };
 
 export const setStoredSocialLinks = (links: SocialLink[]) => {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(KEYS.SOCIAL, JSON.stringify(links));
+  initialSocialLinks.length = 0;
+  initialSocialLinks.push(...links);
   pushToCloud("social", links);
-  window.dispatchEvent(new Event("portfolio-data-changed"));
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("portfolio-data-changed"));
+  }
 };
 
 export const getStoredMessages = (): ContactMessage[] => {
-  if (typeof window === "undefined") return initialMessages;
-  try {
-    const data = localStorage.getItem(KEYS.MESSAGES);
-    return data ? JSON.parse(data) : initialMessages;
-  } catch {
-    return initialMessages;
-  }
+  return initialMessages;
 };
 
 export const setStoredMessages = (messages: ContactMessage[]) => {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(KEYS.MESSAGES, JSON.stringify(messages));
+  initialMessages.length = 0;
+  initialMessages.push(...messages);
   pushToCloud("messages", messages);
-  window.dispatchEvent(new Event("portfolio-data-changed"));
-};
-
-export const getStoredTimeline = (): TimelineItem[] => {
-  if (typeof window === "undefined") return initialTimeline;
-  try {
-    const data = localStorage.getItem(KEYS.TIMELINE);
-    return data ? JSON.parse(data) : initialTimeline;
-  } catch {
-    return initialTimeline;
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("portfolio-data-changed"));
   }
 };
 
+export const getStoredTimeline = (): TimelineItem[] => {
+  return initialTimeline;
+};
+
 export const setStoredTimeline = (timeline: TimelineItem[]) => {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(KEYS.TIMELINE, JSON.stringify(timeline));
+  initialTimeline.length = 0;
+  initialTimeline.push(...timeline);
   pushToCloud("timeline", timeline);
-  window.dispatchEvent(new Event("portfolio-data-changed"));
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("portfolio-data-changed"));
+  }
 };
