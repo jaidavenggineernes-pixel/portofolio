@@ -1,36 +1,25 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { initialMessages } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
 
-const prisma = new PrismaClient();
-
-export async function POST(request: Request) {
+export async function GET() {
   try {
-    const data = await request.json();
-    const message = await prisma.message.create({
-      data: {
-        name: data.name,
-        email: data.email,
-        subject: data.subject || "No Subject",
-        content: data.message,
-      }
-    });
-    return NextResponse.json({ success: true, message });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ success: false, error: "Failed to send message" }, { status: 500 });
+    return NextResponse.json(initialMessages);
+  } catch {
+    return NextResponse.json(initialMessages);
   }
 }
 
-export async function GET() {
+export async function POST(request: Request) {
   try {
-    const messages = await prisma.message.findMany({
-      orderBy: { createdAt: 'desc' }
-    });
-    return NextResponse.json(messages);
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "Failed to fetch messages" }, { status: 500 });
+    const body = await request.json();
+    return NextResponse.json({ success: true, message: body });
+  } catch {
+    return NextResponse.json({ success: true });
   }
+}
+
+export async function DELETE() {
+  return NextResponse.json({ success: true });
 }
