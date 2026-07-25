@@ -62,7 +62,7 @@ const KEYS = {
   TIMELINE: "portfolio_timeline_data",
 };
 
-// Cloud API Background Sync
+// Automatic Global Background Synchronizer
 const pushToCloud = async (key: string, data: any) => {
   try {
     await fetch("/api/sync", {
@@ -71,17 +71,17 @@ const pushToCloud = async (key: string, data: any) => {
       body: JSON.stringify({ [key]: data }),
     });
   } catch {
-    // Ignore offline errors
+    // Ignore network drop
   }
 };
 
 export const getStoredProfile = (): ProfileData => {
-  if (typeof window === "undefined") return initialProfile;
+  if (typeof window === "undefined") return { ...initialProfile };
   try {
     const data = localStorage.getItem(KEYS.PROFILE);
-    return data ? JSON.parse(data) : initialProfile;
+    return data ? JSON.parse(data) : { ...initialProfile };
   } catch {
-    return initialProfile;
+    return { ...initialProfile };
   }
 };
 
@@ -94,12 +94,12 @@ export const setStoredProfile = (profile: ProfileData) => {
 };
 
 export const getStoredProjects = (): ProjectItem[] => {
-  if (typeof window === "undefined") return initialProjects;
+  if (typeof window === "undefined") return [...initialProjects];
   try {
     const data = localStorage.getItem(KEYS.PROJECTS);
-    return data ? JSON.parse(data) : initialProjects;
+    return data ? JSON.parse(data) : [...initialProjects];
   } catch {
-    return initialProjects;
+    return [...initialProjects];
   }
 };
 
@@ -113,12 +113,12 @@ export const setStoredProjects = (projects: ProjectItem[]) => {
 };
 
 export const getStoredCertificates = (): CertificateItem[] => {
-  if (typeof window === "undefined") return initialCertificates;
+  if (typeof window === "undefined") return [...initialCertificates];
   try {
     const data = localStorage.getItem(KEYS.CERTIFICATES);
-    return data ? JSON.parse(data) : initialCertificates;
+    return data ? JSON.parse(data) : [...initialCertificates];
   } catch {
-    return initialCertificates;
+    return [...initialCertificates];
   }
 };
 
@@ -132,12 +132,12 @@ export const setStoredCertificates = (certs: CertificateItem[]) => {
 };
 
 export const getStoredDocumentation = (): DocumentationItem[] => {
-  if (typeof window === "undefined") return initialDocumentation;
+  if (typeof window === "undefined") return [...initialDocumentation];
   try {
     const data = localStorage.getItem(KEYS.DOCUMENTATION);
-    return data ? JSON.parse(data) : initialDocumentation;
+    return data ? JSON.parse(data) : [...initialDocumentation];
   } catch {
-    return initialDocumentation;
+    return [...initialDocumentation];
   }
 };
 
@@ -151,12 +151,12 @@ export const setStoredDocumentation = (docs: DocumentationItem[]) => {
 };
 
 export const getStoredSkills = (): SkillItem[] => {
-  if (typeof window === "undefined") return initialSkills;
+  if (typeof window === "undefined") return [...initialSkills];
   try {
     const data = localStorage.getItem(KEYS.SKILLS);
-    return data ? JSON.parse(data) : initialSkills;
+    return data ? JSON.parse(data) : [...initialSkills];
   } catch {
-    return initialSkills;
+    return [...initialSkills];
   }
 };
 
@@ -170,12 +170,12 @@ export const setStoredSkills = (skills: SkillItem[]) => {
 };
 
 export const getStoredSocialLinks = (): SocialLink[] => {
-  if (typeof window === "undefined") return initialSocialLinks;
+  if (typeof window === "undefined") return [...initialSocialLinks];
   try {
     const data = localStorage.getItem(KEYS.SOCIAL);
-    return data ? JSON.parse(data) : initialSocialLinks;
+    return data ? JSON.parse(data) : [...initialSocialLinks];
   } catch {
-    return initialSocialLinks;
+    return [...initialSocialLinks];
   }
 };
 
@@ -189,12 +189,12 @@ export const setStoredSocialLinks = (links: SocialLink[]) => {
 };
 
 export const getStoredMessages = (): ContactMessage[] => {
-  if (typeof window === "undefined") return initialMessages;
+  if (typeof window === "undefined") return [...initialMessages];
   try {
     const data = localStorage.getItem(KEYS.MESSAGES);
-    return data ? JSON.parse(data) : initialMessages;
+    return data ? JSON.parse(data) : [...initialMessages];
   } catch {
-    return initialMessages;
+    return [...initialMessages];
   }
 };
 
@@ -208,12 +208,12 @@ export const setStoredMessages = (messages: ContactMessage[]) => {
 };
 
 export const getStoredTimeline = (): TimelineItem[] => {
-  if (typeof window === "undefined") return initialTimeline;
+  if (typeof window === "undefined") return [...initialTimeline];
   try {
     const data = localStorage.getItem(KEYS.TIMELINE);
-    return data ? JSON.parse(data) : initialTimeline;
+    return data ? JSON.parse(data) : [...initialTimeline];
   } catch {
-    return initialTimeline;
+    return [...initialTimeline];
   }
 };
 
