@@ -55,22 +55,21 @@ export const supabase = {
 
 // Initial Fallback Data
 export const initialProfile: ProfileData = {
-  fullName: "Alif Raditya",
-  nickname: "Jai / Radit",
-  title: "Fullstack Developer & Creative Technologist",
-  bio: "Seorang pengembang web passionate yang berfokus pada pengalaman pengguna yang modern, animasi interaktif, dan performa tinggi.",
-  motto: "Transforming Vision into Fluid Digital Reality",
+  fullName: "Alif Rizqi Adi Al Jailani",
+  nickname: "ALIF / JAI",
+  title: "Web Developer",
+  bio: "Seorang Web Developer passionate yang berfokus pada pembuatan website modern, animasi interaktif, dan performa tinggi.",
+  motto: "Coding Future",
   age: 21,
-  location: "Jakarta / Indonesia",
-  education: "Teknik Informatika - Universitas",
-  hobbies: ["Coding", "Photography", "Music Production", "UI/UX Design"],
-  interests: ["Artificial Intelligence", "Web3", "Interactive Web Animations", "Creative Media"],
-  goals: "Membangun produk digital kelas dunia yang menginspirasi dan mempermudah kehidupan jutaan pengguna.",
+  location: "Indonesia",
+  education: "Teknik Informatika",
+  hobbies: ["Coding", "UI/UX Design", "Technology"],
+  interests: ["Web Development", "Artificial Intelligence", "Creative Media"],
+  goals: "Membangun produk digital masa depan yang inovatif dan bermanfaat.",
   typingText: [
-    "Fullstack Software Engineer",
-    "UI/UX Enthusiast & Creative Designer",
-    "Next.js & Supabase Specialist",
-    "Digital Content Creator"
+    "Web Developer",
+    "Creative Designer",
+    "Fullstack Enthusiast"
   ],
   cvUrl: "/assets/cv_sample.pdf",
   avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600",
