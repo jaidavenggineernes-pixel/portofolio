@@ -72,7 +72,7 @@ export const initialProfile: ProfileData = {
     "Fullstack Enthusiast"
   ],
   cvUrl: "/assets/cv_sample.pdf",
-  avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600",
+  avatarUrl: "/avatar.png",
   coverUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200",
 };
 
