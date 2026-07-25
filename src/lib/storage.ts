@@ -62,6 +62,19 @@ const KEYS = {
   TIMELINE: "portfolio_timeline_data",
 };
 
+// Global Sync Helper
+const syncToApi = async (key: string, data: any) => {
+  try {
+    await fetch("/api/data", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ [key]: data }),
+    });
+  } catch {
+    // Ignore offline errors
+  }
+};
+
 export const getStoredProfile = (): ProfileData => {
   if (typeof window === "undefined") return initialProfile;
   try {
@@ -75,6 +88,7 @@ export const getStoredProfile = (): ProfileData => {
 export const setStoredProfile = (profile: ProfileData) => {
   if (typeof window === "undefined") return;
   localStorage.setItem(KEYS.PROFILE, JSON.stringify(profile));
+  syncToApi("profile", profile);
   window.dispatchEvent(new Event("portfolio-data-changed"));
 };
 
@@ -91,6 +105,7 @@ export const getStoredProjects = (): ProjectItem[] => {
 export const setStoredProjects = (projects: ProjectItem[]) => {
   if (typeof window === "undefined") return;
   localStorage.setItem(KEYS.PROJECTS, JSON.stringify(projects));
+  syncToApi("projects", projects);
   window.dispatchEvent(new Event("portfolio-data-changed"));
 };
 
@@ -107,6 +122,7 @@ export const getStoredCertificates = (): CertificateItem[] => {
 export const setStoredCertificates = (certs: CertificateItem[]) => {
   if (typeof window === "undefined") return;
   localStorage.setItem(KEYS.CERTIFICATES, JSON.stringify(certs));
+  syncToApi("certificates", certs);
   window.dispatchEvent(new Event("portfolio-data-changed"));
 };
 
@@ -123,6 +139,7 @@ export const getStoredDocumentation = (): DocumentationItem[] => {
 export const setStoredDocumentation = (docs: DocumentationItem[]) => {
   if (typeof window === "undefined") return;
   localStorage.setItem(KEYS.DOCUMENTATION, JSON.stringify(docs));
+  syncToApi("documentation", docs);
   window.dispatchEvent(new Event("portfolio-data-changed"));
 };
 
@@ -139,6 +156,7 @@ export const getStoredSkills = (): SkillItem[] => {
 export const setStoredSkills = (skills: SkillItem[]) => {
   if (typeof window === "undefined") return;
   localStorage.setItem(KEYS.SKILLS, JSON.stringify(skills));
+  syncToApi("skills", skills);
   window.dispatchEvent(new Event("portfolio-data-changed"));
 };
 
@@ -155,6 +173,7 @@ export const getStoredSocialLinks = (): SocialLink[] => {
 export const setStoredSocialLinks = (links: SocialLink[]) => {
   if (typeof window === "undefined") return;
   localStorage.setItem(KEYS.SOCIAL, JSON.stringify(links));
+  syncToApi("social", links);
   window.dispatchEvent(new Event("portfolio-data-changed"));
 };
 
@@ -171,6 +190,7 @@ export const getStoredMessages = (): ContactMessage[] => {
 export const setStoredMessages = (messages: ContactMessage[]) => {
   if (typeof window === "undefined") return;
   localStorage.setItem(KEYS.MESSAGES, JSON.stringify(messages));
+  syncToApi("messages", messages);
   window.dispatchEvent(new Event("portfolio-data-changed"));
 };
 
@@ -187,5 +207,6 @@ export const getStoredTimeline = (): TimelineItem[] => {
 export const setStoredTimeline = (timeline: TimelineItem[]) => {
   if (typeof window === "undefined") return;
   localStorage.setItem(KEYS.TIMELINE, JSON.stringify(timeline));
+  syncToApi("timeline", timeline);
   window.dispatchEvent(new Event("portfolio-data-changed"));
 };
