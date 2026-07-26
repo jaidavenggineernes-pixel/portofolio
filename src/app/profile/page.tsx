@@ -14,7 +14,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { ProfileData, SkillItem, TimelineItem } from "@/types/portfolio";
-import { getStoredProfile, getStoredSkills, getStoredTimeline } from "@/lib/storage";
+import { getStoredProfile, getStoredSkills, getStoredTimeline, fetchGlobalData } from "@/lib/storage";
 
 const techStackList = [
   { name: "HTML5", category: "Markup", color: "from-orange-500 to-amber-500" },
@@ -46,7 +46,7 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
-    loadData();
+    fetchGlobalData().then(() => loadData());
 
     const handleDataChange = () => {
       loadData();

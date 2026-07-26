@@ -21,6 +21,7 @@ import {
   getStoredProjects,
   getStoredCertificates,
   getStoredDocumentation,
+  fetchGlobalData,
 } from "@/lib/storage";
 
 export default function PortfolioPage() {
@@ -46,7 +47,7 @@ export default function PortfolioPage() {
   };
 
   useEffect(() => {
-    loadAllData();
+    fetchGlobalData().then(() => loadAllData());
 
     const handleDataChange = () => {
       loadAllData();

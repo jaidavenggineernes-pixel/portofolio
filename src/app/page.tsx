@@ -17,7 +17,7 @@ import {
   ChevronRight,
   Terminal,
 } from "lucide-react";
-import { getStoredProfile, getStoredProjects } from "@/lib/storage";
+import { getStoredProfile, getStoredProjects, fetchGlobalData } from "@/lib/storage";
 import { ProfileData, ProjectItem } from "@/types/portfolio";
 
 export default function Home() {
@@ -36,7 +36,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    loadData();
+    fetchGlobalData().then(() => loadData());
     const handleDataChange = () => {
       loadData();
     };

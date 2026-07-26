@@ -18,7 +18,7 @@ import {
   TiktokIcon,
   DiscordIcon,
 } from "@/components/SocialIcons";
-import { getStoredMessages, setStoredMessages, getStoredSocialLinks } from "@/lib/storage";
+import { getStoredMessages, setStoredMessages, getStoredSocialLinks, fetchGlobalData } from "@/lib/storage";
 import { SocialLink } from "@/types/portfolio";
 
 export default function ContactPage() {
@@ -39,7 +39,7 @@ export default function ContactPage() {
   };
 
   useEffect(() => {
-    loadData();
+    fetchGlobalData().then(() => loadData());
     const handleDataChange = () => {
       loadData();
     };
