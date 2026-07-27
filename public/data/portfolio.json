@@ -1,0 +1,120 @@
+{
+  "profile": {
+    "fullName": "Alif Rizqi Adi Al Jailani",
+    "nickname": "ALIF / JAI",
+    "title": "Web Developer",
+    "bio": "Seorang Web Developer passionate yang berfokus pada pembuatan website modern, animasi interaktif, dan performa tinggi.",
+    "motto": "Coding Future",
+    "age": 21,
+    "location": "Indonesia",
+    "education": "Teknik Informatika",
+    "hobbies": ["Coding", "UI/UX Design", "Technology"],
+    "interests": ["Web Development", "Artificial Intelligence", "Creative Media"],
+    "goals": "Membangun produk digital masa depan yang inovatif dan bermanfaat.",
+    "typingText": [
+      "Web Developer",
+      "Creative Designer",
+      "Fullstack Enthusiast"
+    ],
+    "cvUrl": "/assets/cv_sample.pdf",
+    "avatarUrl": "/avatar.png",
+    "coverUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200"
+  },
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": "Vanguard AI Engine",
+      "description": "Platform kecerdasan buatan berbasis Next.js App Router dan OpenAI API untuk analisis data prediktif secara real-time.",
+      "longDescription": "Vanguard AI Engine adalah platform analitik cerdas yang menggabungkan visualisasi data berkecepatan tinggi dengan pemrosesan bahasa alami.",
+      "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800",
+      "category": "Fullstack App",
+      "techStack": ["Next.js 16", "TypeScript", "Tailwind CSS", "Supabase", "OpenAI"],
+      "year": "2026",
+      "status": "Featured",
+      "demoUrl": "https://example.com/demo",
+      "githubUrl": "https://github.com/example/vanguard",
+      "featured": true
+    },
+    {
+      "id": "proj-2",
+      "title": "Nexus Sound Music Player",
+      "description": "Aplikasi streaming musik modern dengan audio visualizer 3D canvas interaktif dan equalizer terintegrasi.",
+      "longDescription": "Sistem pemutar musik berbasis web dengan integrasi Web Audio API, animasi lirik real-time, serta fitur playlist berbagi.",
+      "thumbnail": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800",
+      "category": "Web Application",
+      "techStack": ["React 19", "Three.js", "Framer Motion", "Tailwind CSS"],
+      "year": "2025",
+      "status": "Completed",
+      "demoUrl": "https://example.com/sound",
+      "githubUrl": "https://github.com/example/sound",
+      "featured": true
+    }
+  ],
+  "certificates": [
+    {
+      "id": "cert-1",
+      "title": "Fullstack Web Developer Certification",
+      "issuer": "Google & Dicoding Academy",
+      "issueDate": "2025-11-15",
+      "credentialUrl": "https://example.com/credential/123",
+      "fileUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&q=80&w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&q=80&w=800",
+      "category": "Web Development"
+    }
+  ],
+  "documentation": [
+    {
+      "id": "doc-1",
+      "title": "Keynote Speaker @ Tech Summit 2026",
+      "description": "Membawakan materi mengenai 'The Future of Liquid Web Animation and Next.js Architecture'.",
+      "imageUrl": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80&w=800",
+      "date": "2026-02-10",
+      "category": "Conference"
+    }
+  ],
+  "skills": [
+    { "id": "sk-1", "name": "React / Next.js (App Router)", "category": "Frontend", "percentage": 95 },
+    { "id": "sk-2", "name": "TypeScript / JavaScript ES6+", "category": "Frontend", "percentage": 92 },
+    { "id": "sk-3", "name": "Tailwind CSS & Glassmorphism UI", "category": "Frontend", "percentage": 96 },
+    { "id": "sk-4", "name": "Node.js & Express REST/GraphQL APIs", "category": "Backend", "percentage": 88 }
+  ],
+  "social": [
+    { "id": "soc-1", "platform": "WhatsApp", "url": "https://wa.me/6281234567890", "username": "+62 812-3456-7890", "icon": "MessageSquare" },
+    { "id": "soc-2", "platform": "Email", "url": "mailto:jaijul@example.com", "username": "jaijul@example.com", "icon": "Mail" },
+    { "id": "soc-3", "platform": "GitHub", "url": "https://github.com/jaidavenggineernes-pixel", "username": "jaidavenggineernes-pixel", "icon": "Github" },
+    { "id": "soc-4", "platform": "Instagram", "url": "https://instagram.com/jaidavenggineernes", "username": "@jaidavenggineernes", "icon": "Instagram" },
+    { "id": "soc-5", "platform": "TikTok", "url": "https://tiktok.com/@jaidavenggineernes", "username": "@jaidavenggineernes", "icon": "Video" }
+  ],
+  "timeline": [
+    {
+      "id": "tl-1",
+      "year": "2021",
+      "title": "Awal Belajar & Ketertarikan Teknologi",
+      "description": "Mulai mengenal pemrograman web dasar (HTML, CSS, JavaScript) dan menyukai dunia estetika UI/UX."
+    },
+    {
+      "id": "tl-2",
+      "year": "2022",
+      "title": "Masuk Perguruan Tinggi & Eksplorasi Stack",
+      "description": "Menempuh studi Teknik Informatika. Mempelajari struktur data, algoritma, serta framework modern seperti React."
+    },
+    {
+      "id": "tl-3",
+      "year": "2023 - 2024",
+      "title": "Fokus Fullstack Development & Project Real",
+      "description": "Mengembangkan berbagai aplikasi web menggunakan Next.js, Node.js, Tailwind CSS, dan Supabase/PostgreSQL."
+    },
+    {
+      "id": "tl-4",
+      "year": "2025",
+      "title": "Meraih Sertifikasi & Juara Hackathon",
+      "description": "Mendapatkan sertifikasi profesional fullstack dari Google/AWS serta menjuarai kompetisi pengembangan aplikasi digital."
+    },
+    {
+      "id": "tl-5",
+      "year": "2026 - Present",
+      "title": "Creative Technologist & Open Source",
+      "description": "Aktif membangun produk digital berefisiensi tinggi dengan desain liquid glass dan pengalaman pengguna interaktif."
+    }
+  ]
+}
