@@ -90,101 +90,101 @@ export const getStoredProfile = (): ProfileData => {
   return { ...initialProfile };
 };
 
-export const setStoredProfile = (profile: ProfileData) => {
+export const setStoredProfile = async (profile: ProfileData) => {
   Object.assign(initialProfile, profile);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
-  pushToCloud("profile", profile);
+  await pushToCloud("profile", profile);
 };
 
 export const getStoredProjects = (): ProjectItem[] => {
   return [...initialProjects];
 };
 
-export const setStoredProjects = (projects: ProjectItem[]) => {
+export const setStoredProjects = async (projects: ProjectItem[]) => {
   initialProjects.length = 0;
   initialProjects.push(...projects);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
-  pushToCloud("projects", projects);
+  await pushToCloud("projects", projects);
 };
 
 export const getStoredCertificates = (): CertificateItem[] => {
   return [...initialCertificates];
 };
 
-export const setStoredCertificates = (certs: CertificateItem[]) => {
+export const setStoredCertificates = async (certs: CertificateItem[]) => {
   initialCertificates.length = 0;
   initialCertificates.push(...certs);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
-  pushToCloud("certificates", certs);
+  await pushToCloud("certificates", certs);
 };
 
 export const getStoredDocumentation = (): DocumentationItem[] => {
   return [...initialDocumentation];
 };
 
-export const setStoredDocumentation = (docs: DocumentationItem[]) => {
+export const setStoredDocumentation = async (docs: DocumentationItem[]) => {
   initialDocumentation.length = 0;
   initialDocumentation.push(...docs);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
-  pushToCloud("documentation", docs);
+  await pushToCloud("documentation", docs);
 };
 
 export const getStoredSkills = (): SkillItem[] => {
   return [...initialSkills];
 };
 
-export const setStoredSkills = (skills: SkillItem[]) => {
+export const setStoredSkills = async (skills: SkillItem[]) => {
   initialSkills.length = 0;
   initialSkills.push(...skills);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
-  pushToCloud("skills", skills);
+  await pushToCloud("skills", skills);
 };
 
 export const getStoredSocialLinks = (): SocialLink[] => {
   return [...initialSocialLinks];
 };
 
-export const setStoredSocialLinks = (links: SocialLink[]) => {
+export const setStoredSocialLinks = async (links: SocialLink[]) => {
   initialSocialLinks.length = 0;
   initialSocialLinks.push(...links);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
-  pushToCloud("social", links);
+  await pushToCloud("social", links);
 };
 
 export const getStoredMessages = (): ContactMessage[] => {
   return [...initialMessages];
 };
 
-export const setStoredMessages = (messages: ContactMessage[]) => {
+export const setStoredMessages = async (messages: ContactMessage[]) => {
   initialMessages.length = 0;
   initialMessages.push(...messages);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
-  pushToCloud("messages", messages);
+  await pushToCloud("messages", messages);
 };
 
 export const getStoredTimeline = (): TimelineItem[] => {
   return [...initialTimeline];
 };
 
-export const setStoredTimeline = (timeline: TimelineItem[]) => {
+export const setStoredTimeline = async (timeline: TimelineItem[]) => {
   initialTimeline.length = 0;
   initialTimeline.push(...timeline);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
-  pushToCloud("timeline", timeline);
+  await pushToCloud("timeline", timeline);
 };

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Save, User, CheckCircle2, Image as ImageIcon, FileText, Upload, Camera } from "lucide-react";
 import { ProfileData } from "@/types/portfolio";
-import { getStoredProfile, setStoredProfile } from "@/lib/storage";
+import { getStoredProfile, await setStoredProfile } from "@/lib/storage";
 
 export default function AdminProfilePage() {
   const [profile, setProfile] = useState<ProfileData | null>(null);
@@ -33,7 +33,7 @@ export default function AdminProfilePage() {
     reader.readAsDataURL(file);
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!profile) return;
 
@@ -45,7 +45,7 @@ export default function AdminProfilePage() {
     };
 
     setProfile(updated);
-    setStoredProfile(updated);
+    await setStoredProfile(updated);
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };

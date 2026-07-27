@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Trash2, CheckSquare, X } from "lucide-react";
 import { SkillItem } from "@/types/portfolio";
-import { getStoredSkills, setStoredSkills } from "@/lib/storage";
+import { getStoredSkills, await setStoredSkills } from "@/lib/storage";
 
 export default function AdminSkillsPage() {
   const [skills, setSkills] = useState<SkillItem[]>([]);
@@ -18,7 +18,7 @@ export default function AdminSkillsPage() {
     setSkills(getStoredSkills());
   }, []);
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     const item: SkillItem = {
       ...newSkill,
@@ -26,14 +26,14 @@ export default function AdminSkillsPage() {
     };
     const updated = [item, ...skills];
     setSkills(updated);
-    setStoredSkills(updated);
+    await setStoredSkills(updated);
     setShowModal(false);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     const updated = skills.filter((s) => s.id !== id);
     setSkills(updated);
-    setStoredSkills(updated);
+    await setStoredSkills(updated);
   };
 
   return (

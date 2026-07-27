@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Share2, Plus, Trash2, Edit3, Save, X, CheckCircle2 } from "lucide-react";
 import { SocialLink } from "@/types/portfolio";
-import { getStoredSocialLinks, setStoredSocialLinks } from "@/lib/storage";
+import { getStoredSocialLinks, await setStoredSocialLinks } from "@/lib/storage";
 
 export default function AdminSocialPage() {
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
@@ -20,7 +20,7 @@ export default function AdminSocialPage() {
     setSocialLinks(getStoredSocialLinks());
   }, []);
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingLink.username || !editingLink.url) return;
 
@@ -38,16 +38,16 @@ export default function AdminSocialPage() {
     }
 
     setSocialLinks(updated);
-    setStoredSocialLinks(updated);
+    await setStoredSocialLinks(updated);
     setShowModal(false);
     setSavedMsg(true);
     setTimeout(() => setSavedMsg(false), 3000);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     const updated = socialLinks.filter((item) => item.id !== id);
     setSocialLinks(updated);
-    setStoredSocialLinks(updated);
+    await setStoredSocialLinks(updated);
   };
 
   return (

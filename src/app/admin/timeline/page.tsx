@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Trash2, Edit3, Rocket, X, CheckCircle2 } from "lucide-react";
 import { TimelineItem } from "@/types/portfolio";
-import { getStoredTimeline, setStoredTimeline } from "@/lib/storage";
+import { getStoredTimeline, await setStoredTimeline } from "@/lib/storage";
 
 export default function AdminTimelinePage() {
   const [timeline, setTimeline] = useState<TimelineItem[]>([]);
@@ -19,7 +19,7 @@ export default function AdminTimelinePage() {
     setTimeline(getStoredTimeline());
   }, []);
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingItem.title || !editingItem.year) return;
 
@@ -37,16 +37,16 @@ export default function AdminTimelinePage() {
     }
 
     setTimeline(updated);
-    setStoredTimeline(updated);
+    await setStoredTimeline(updated);
     setShowModal(false);
     setSavedMsg(true);
     setTimeout(() => setSavedMsg(false), 3000);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     const updated = timeline.filter((item) => item.id !== id);
     setTimeline(updated);
-    setStoredTimeline(updated);
+    await setStoredTimeline(updated);
   };
 
   return (

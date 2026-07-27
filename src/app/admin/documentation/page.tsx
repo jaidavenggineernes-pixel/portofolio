@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Trash2, Camera, X } from "lucide-react";
 import { DocumentationItem } from "@/types/portfolio";
-import { getStoredDocumentation, setStoredDocumentation } from "@/lib/storage";
+import { getStoredDocumentation, await setStoredDocumentation } from "@/lib/storage";
 
 export default function AdminDocumentationPage() {
   const [docs, setDocs] = useState<DocumentationItem[]>([]);
@@ -20,7 +20,7 @@ export default function AdminDocumentationPage() {
     setDocs(getStoredDocumentation());
   }, []);
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     const item: DocumentationItem = {
       ...newDoc,
@@ -28,14 +28,14 @@ export default function AdminDocumentationPage() {
     };
     const updated = [item, ...docs];
     setDocs(updated);
-    setStoredDocumentation(updated);
+    await setStoredDocumentation(updated);
     setShowModal(false);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     const updated = docs.filter((d) => d.id !== id);
     setDocs(updated);
-    setStoredDocumentation(updated);
+    await setStoredDocumentation(updated);
   };
 
   return (

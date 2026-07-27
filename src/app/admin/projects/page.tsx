@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Trash2, Edit3, FolderGit2, X, Upload, Image as ImageIcon } from "lucide-react";
 import { ProjectItem } from "@/types/portfolio";
-import { getStoredProjects, setStoredProjects } from "@/lib/storage";
+import { getStoredProjects, await setStoredProjects } from "@/lib/storage";
 
 export default function AdminProjectsPage() {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
@@ -41,7 +41,7 @@ export default function AdminProjectsPage() {
     reader.readAsDataURL(file);
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingProject.title || !editingProject.thumbnail) return;
 
@@ -62,14 +62,14 @@ export default function AdminProjectsPage() {
     }
 
     setProjects(updated);
-    setStoredProjects(updated);
+    await setStoredProjects(updated);
     setShowModal(false);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     const updated = projects.filter((p) => p.id !== id);
     setProjects(updated);
-    setStoredProjects(updated);
+    await setStoredProjects(updated);
   };
 
   return (

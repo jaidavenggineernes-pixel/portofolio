@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { MessageSquare, Trash2, Calendar, CheckCircle2 } from "lucide-react";
 import { ContactMessage } from "@/types/portfolio";
-import { getStoredMessages, setStoredMessages } from "@/lib/storage";
+import { getStoredMessages, await setStoredMessages } from "@/lib/storage";
 
 export default function AdminMessagesPage() {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
@@ -17,13 +17,13 @@ export default function AdminMessagesPage() {
       m.id === id ? { ...m, read: !m.read } : m
     );
     setMessages(updated);
-    setStoredMessages(updated);
+    await setStoredMessages(updated);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     const updated = messages.filter((m) => m.id !== id);
     setMessages(updated);
-    setStoredMessages(updated);
+    await setStoredMessages(updated);
   };
 
   return (

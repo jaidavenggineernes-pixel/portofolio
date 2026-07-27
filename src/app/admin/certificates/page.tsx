@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Trash2, Award, X } from "lucide-react";
 import { CertificateItem } from "@/types/portfolio";
-import { getStoredCertificates, setStoredCertificates } from "@/lib/storage";
+import { getStoredCertificates, await setStoredCertificates } from "@/lib/storage";
 
 export default function AdminCertificatesPage() {
   const [certs, setCerts] = useState<CertificateItem[]>([]);
@@ -20,7 +20,7 @@ export default function AdminCertificatesPage() {
     setCerts(getStoredCertificates());
   }, []);
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     const item: CertificateItem = {
       ...newCert,
@@ -28,14 +28,14 @@ export default function AdminCertificatesPage() {
     };
     const updated = [item, ...certs];
     setCerts(updated);
-    setStoredCertificates(updated);
+    await setStoredCertificates(updated);
     setShowModal(false);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     const updated = certs.filter((c) => c.id !== id);
     setCerts(updated);
-    setStoredCertificates(updated);
+    await setStoredCertificates(updated);
   };
 
   return (
