@@ -51,18 +51,7 @@ export const initialTimeline: TimelineItem[] = [
   },
 ];
 
-const KEYS = {
-  PROFILE: "portfolio_profile_data",
-  PROJECTS: "portfolio_projects_data",
-  CERTIFICATES: "portfolio_certificates_data",
-  DOCUMENTATION: "portfolio_documentation_data",
-  SKILLS: "portfolio_skills_data",
-  SOCIAL: "portfolio_social_data",
-  MESSAGES: "portfolio_messages_data",
-  TIMELINE: "portfolio_timeline_data",
-};
-
-// Cloud Sync Helper (Non-blocking)
+// Cloud API Sync Helper (Non-blocking)
 const pushToCloud = async (key: string, data: any) => {
   try {
     await fetch("/api/data", {
@@ -96,191 +85,103 @@ export const fetchGlobalData = async () => {
 };
 
 export const getStoredProfile = (): ProfileData => {
-  if (typeof window === "undefined") return { ...initialProfile };
-  try {
-    const data = localStorage.getItem(KEYS.PROFILE);
-    return data ? JSON.parse(data) : { ...initialProfile };
-  } catch {
-    return { ...initialProfile };
-  }
+  return { ...initialProfile };
 };
 
 export const setStoredProfile = (profile: ProfileData) => {
   Object.assign(initialProfile, profile);
   if (typeof window !== "undefined") {
-    try {
-      localStorage.setItem(KEYS.PROFILE, JSON.stringify(profile));
-    } catch {
-      // Ignore quota error
-    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
   pushToCloud("profile", profile);
 };
 
 export const getStoredProjects = (): ProjectItem[] => {
-  if (typeof window === "undefined") return [...initialProjects];
-  try {
-    const data = localStorage.getItem(KEYS.PROJECTS);
-    return data ? JSON.parse(data) : [...initialProjects];
-  } catch {
-    return [...initialProjects];
-  }
+  return [...initialProjects];
 };
 
 export const setStoredProjects = (projects: ProjectItem[]) => {
   initialProjects.length = 0;
   initialProjects.push(...projects);
   if (typeof window !== "undefined") {
-    try {
-      localStorage.setItem(KEYS.PROJECTS, JSON.stringify(projects));
-    } catch {
-      // Ignore quota error
-    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
   pushToCloud("projects", projects);
 };
 
 export const getStoredCertificates = (): CertificateItem[] => {
-  if (typeof window === "undefined") return [...initialCertificates];
-  try {
-    const data = localStorage.getItem(KEYS.CERTIFICATES);
-    return data ? JSON.parse(data) : [...initialCertificates];
-  } catch {
-    return [...initialCertificates];
-  }
+  return [...initialCertificates];
 };
 
 export const setStoredCertificates = (certs: CertificateItem[]) => {
   initialCertificates.length = 0;
   initialCertificates.push(...certs);
   if (typeof window !== "undefined") {
-    try {
-      localStorage.setItem(KEYS.CERTIFICATES, JSON.stringify(certs));
-    } catch {
-      // Ignore quota error
-    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
   pushToCloud("certificates", certs);
 };
 
 export const getStoredDocumentation = (): DocumentationItem[] => {
-  if (typeof window === "undefined") return [...initialDocumentation];
-  try {
-    const data = localStorage.getItem(KEYS.DOCUMENTATION);
-    return data ? JSON.parse(data) : [...initialDocumentation];
-  } catch {
-    return [...initialDocumentation];
-  }
+  return [...initialDocumentation];
 };
 
 export const setStoredDocumentation = (docs: DocumentationItem[]) => {
   initialDocumentation.length = 0;
   initialDocumentation.push(...docs);
   if (typeof window !== "undefined") {
-    try {
-      localStorage.setItem(KEYS.DOCUMENTATION, JSON.stringify(docs));
-    } catch {
-      // Ignore quota error
-    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
   pushToCloud("documentation", docs);
 };
 
 export const getStoredSkills = (): SkillItem[] => {
-  if (typeof window === "undefined") return [...initialSkills];
-  try {
-    const data = localStorage.getItem(KEYS.SKILLS);
-    return data ? JSON.parse(data) : [...initialSkills];
-  } catch {
-    return [...initialSkills];
-  }
+  return [...initialSkills];
 };
 
 export const setStoredSkills = (skills: SkillItem[]) => {
   initialSkills.length = 0;
   initialSkills.push(...skills);
   if (typeof window !== "undefined") {
-    try {
-      localStorage.setItem(KEYS.SKILLS, JSON.stringify(skills));
-    } catch {
-      // Ignore quota error
-    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
   pushToCloud("skills", skills);
 };
 
 export const getStoredSocialLinks = (): SocialLink[] => {
-  if (typeof window === "undefined") return [...initialSocialLinks];
-  try {
-    const data = localStorage.getItem(KEYS.SOCIAL);
-    return data ? JSON.parse(data) : [...initialSocialLinks];
-  } catch {
-    return [...initialSocialLinks];
-  }
+  return [...initialSocialLinks];
 };
 
 export const setStoredSocialLinks = (links: SocialLink[]) => {
   initialSocialLinks.length = 0;
   initialSocialLinks.push(...links);
   if (typeof window !== "undefined") {
-    try {
-      localStorage.setItem(KEYS.SOCIAL, JSON.stringify(links));
-    } catch {
-      // Ignore quota error
-    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
   pushToCloud("social", links);
 };
 
 export const getStoredMessages = (): ContactMessage[] => {
-  if (typeof window === "undefined") return [...initialMessages];
-  try {
-    const data = localStorage.getItem(KEYS.MESSAGES);
-    return data ? JSON.parse(data) : [...initialMessages];
-  } catch {
-    return [...initialMessages];
-  }
+  return [...initialMessages];
 };
 
 export const setStoredMessages = (messages: ContactMessage[]) => {
   initialMessages.length = 0;
   initialMessages.push(...messages);
   if (typeof window !== "undefined") {
-    try {
-      localStorage.setItem(KEYS.MESSAGES, JSON.stringify(messages));
-    } catch {
-      // Ignore quota error
-    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
   pushToCloud("messages", messages);
 };
 
 export const getStoredTimeline = (): TimelineItem[] => {
-  if (typeof window === "undefined") return [...initialTimeline];
-  try {
-    const data = localStorage.getItem(KEYS.TIMELINE);
-    return data ? JSON.parse(data) : [...initialTimeline];
-  } catch {
-    return [...initialTimeline];
-  }
+  return [...initialTimeline];
 };
 
 export const setStoredTimeline = (timeline: TimelineItem[]) => {
   initialTimeline.length = 0;
   initialTimeline.push(...timeline);
   if (typeof window !== "undefined") {
-    try {
-      localStorage.setItem(KEYS.TIMELINE, JSON.stringify(timeline));
-    } catch {
-      // Ignore quota error
-    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
   pushToCloud("timeline", timeline);
