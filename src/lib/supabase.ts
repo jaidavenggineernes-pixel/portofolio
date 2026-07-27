@@ -1,3 +1,4 @@
+import { createClient } from "@supabase/supabase-js";
 import {
   ProfileData,
   ProjectItem,
@@ -8,50 +9,12 @@ import {
   ContactMessage,
 } from "@/types/portfolio";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://bcwpnbwznvcvegdmbnjt.supabase.co";
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_lUfwt_xoaValHTyRt1WCYw_bbLrHv0e";
 
 export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
-// Zero-dependency Supabase REST helper
-export const supabase = {
-  from: (table: string) => ({
-    select: async () => {
-      if (!isSupabaseConfigured) return { data: null, error: null };
-      try {
-        const res = await fetch(`${supabaseUrl}/rest/v1/${table}?select=*`, {
-          headers: {
-            apikey: supabaseAnonKey,
-            Authorization: `Bearer ${supabaseAnonKey}`,
-          },
-        });
-        const data = await res.json();
-        return { data, error: null };
-      } catch (err) {
-        return { data: null, error: err };
-      }
-    },
-    insert: async (values: any[]) => {
-      if (!isSupabaseConfigured) return { data: values, error: null };
-      try {
-        const res = await fetch(`${supabaseUrl}/rest/v1/${table}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            apikey: supabaseAnonKey,
-            Authorization: `Bearer ${supabaseAnonKey}`,
-            Prefer: "return=representation",
-          },
-          body: JSON.stringify(values),
-        });
-        const data = await res.json();
-        return { data, error: null };
-      } catch (err) {
-        return { data: null, error: err };
-      }
-    },
-  }),
-};
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Initial Fallback Data
 export const initialProfile: ProfileData = {

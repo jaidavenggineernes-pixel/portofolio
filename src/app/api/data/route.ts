@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { readFile, writeFile } from "fs/promises";
-import { join } from "path";
 import {
   initialProfile,
   initialProjects,
@@ -8,12 +6,11 @@ import {
   initialDocumentation,
   initialSkills,
   initialSocialLinks,
+  supabase
 } from "@/lib/supabase";
 import { initialTimeline } from "@/lib/storage";
 
 export const dynamic = "force-dynamic";
-
-const DATA_FILE_PATH = join(process.cwd(), "public", "data", "portfolio.json");
 
 const fallbackData = {
   profile: initialProfile,
@@ -27,9 +24,17 @@ const fallbackData = {
 
 export async function GET() {
   try {
-    const fileContent = await readFile(DATA_FILE_PATH, "utf-8");
-    const json = JSON.parse(fileContent);
-    return NextResponse.json(json);
+    const { data, error } = await supabase
+      .from("portfolio_data")
+      .select("data")
+      .eq("id", "main_state")
+      .single();
+    
+    if (error || !data) {
+      return NextResponse.json(fallbackData);
+    }
+    
+    return NextResponse.json(data.data || fallbackData);
   } catch {
     return NextResponse.json(fallbackData);
   }
@@ -38,28 +43,36 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    
+    // Fetch current
     let currentData = { ...fallbackData };
-
-    try {
-      const fileContent = await readFile(DATA_FILE_PATH, "utf-8");
-      currentData = JSON.parse(fileContent);
-    } catch {
-      // Use fallback
+    const { data: fetchRes, error: fetchErr } = await supabase
+      .from("portfolio_data")
+      .select("data")
+      .eq("id", "main_state")
+      .single();
+    
+    if (!fetchErr && fetchRes && fetchRes.data) {
+      currentData = fetchRes.data;
     }
-
+    
     const updatedData = {
       ...currentData,
       ...body,
     };
-
-    try {
-      await writeFile(DATA_FILE_PATH, JSON.stringify(updatedData, null, 2), "utf-8");
-    } catch {
-      // Ignore if read-only filesystem
+    
+    // Upsert to Supabase
+    const { error: upsertErr } = await supabase
+      .from("portfolio_data")
+      .upsert({ id: "main_state", data: updatedData });
+      
+    if (upsertErr) {
+      console.error("Supabase upsert error:", upsertErr);
+      return NextResponse.json({ success: false, error: upsertErr.message }, { status: 500 });
     }
 
     return NextResponse.json({ success: true, data: updatedData });
-  } catch {
-    return NextResponse.json({ success: false, error: "Failed to update" }, { status: 500 });
+  } catch (err: any) {
+    return NextResponse.json({ success: false, error: err.message }, { status: 500 });
   }
 }
