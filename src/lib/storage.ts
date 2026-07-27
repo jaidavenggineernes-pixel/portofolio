@@ -51,7 +51,18 @@ export const initialTimeline: TimelineItem[] = [
   },
 ];
 
-// Server API Sync Helper
+const KEYS = {
+  PROFILE: "portfolio_profile_data",
+  PROJECTS: "portfolio_projects_data",
+  CERTIFICATES: "portfolio_certificates_data",
+  DOCUMENTATION: "portfolio_documentation_data",
+  SKILLS: "portfolio_skills_data",
+  SOCIAL: "portfolio_social_data",
+  MESSAGES: "portfolio_messages_data",
+  TIMELINE: "portfolio_timeline_data",
+};
+
+// Cloud Sync Helper (Non-blocking)
 const pushToCloud = async (key: string, data: any) => {
   try {
     await fetch("/api/data", {
@@ -64,7 +75,7 @@ const pushToCloud = async (key: string, data: any) => {
   }
 };
 
-// Fetch Latest Server Data for all devices
+// Fetch Latest Server Data for all devices on mount
 export const fetchGlobalData = async () => {
   if (typeof window === "undefined") return;
   try {
@@ -78,7 +89,6 @@ export const fetchGlobalData = async () => {
       if (data.skills) { initialSkills.length = 0; initialSkills.push(...data.skills); }
       if (data.social) { initialSocialLinks.length = 0; initialSocialLinks.push(...data.social); }
       if (data.timeline) { initialTimeline.length = 0; initialTimeline.push(...data.timeline); }
-      window.dispatchEvent(new Event("portfolio-data-changed"));
     }
   } catch {
     // Ignore
@@ -86,104 +96,192 @@ export const fetchGlobalData = async () => {
 };
 
 export const getStoredProfile = (): ProfileData => {
-  return { ...initialProfile };
+  if (typeof window === "undefined") return { ...initialProfile };
+  try {
+    const data = localStorage.getItem(KEYS.PROFILE);
+    return data ? JSON.parse(data) : { ...initialProfile };
+  } catch {
+    return { ...initialProfile };
+  }
 };
 
 export const setStoredProfile = (profile: ProfileData) => {
   Object.assign(initialProfile, profile);
-  pushToCloud("profile", profile);
   if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(KEYS.PROFILE, JSON.stringify(profile));
+    } catch {
+      // Ignore quota error
+    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
+  pushToCloud("profile", profile);
 };
 
 export const getStoredProjects = (): ProjectItem[] => {
-  return [...initialProjects];
+  if (typeof window === "undefined") return [...initialProjects];
+  try {
+    const data = localStorage.getItem(KEYS.PROJECTS);
+    return data ? JSON.parse(data) : [...initialProjects];
+  } catch {
+    return [...initialProjects];
+  }
 };
 
 export const setStoredProjects = (projects: ProjectItem[]) => {
   initialProjects.length = 0;
   initialProjects.push(...projects);
-  pushToCloud("projects", projects);
   if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(KEYS.PROJECTS, JSON.stringify(projects));
+    } catch {
+      // Ignore quota error
+    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
+  pushToCloud("projects", projects);
 };
 
 export const getStoredCertificates = (): CertificateItem[] => {
-  return [...initialCertificates];
+  if (typeof window === "undefined") return [...initialCertificates];
+  try {
+    const data = localStorage.getItem(KEYS.CERTIFICATES);
+    return data ? JSON.parse(data) : [...initialCertificates];
+  } catch {
+    return [...initialCertificates];
+  }
 };
 
 export const setStoredCertificates = (certs: CertificateItem[]) => {
   initialCertificates.length = 0;
   initialCertificates.push(...certs);
-  pushToCloud("certificates", certs);
   if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(KEYS.CERTIFICATES, JSON.stringify(certs));
+    } catch {
+      // Ignore quota error
+    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
+  pushToCloud("certificates", certs);
 };
 
 export const getStoredDocumentation = (): DocumentationItem[] => {
-  return [...initialDocumentation];
+  if (typeof window === "undefined") return [...initialDocumentation];
+  try {
+    const data = localStorage.getItem(KEYS.DOCUMENTATION);
+    return data ? JSON.parse(data) : [...initialDocumentation];
+  } catch {
+    return [...initialDocumentation];
+  }
 };
 
 export const setStoredDocumentation = (docs: DocumentationItem[]) => {
   initialDocumentation.length = 0;
   initialDocumentation.push(...docs);
-  pushToCloud("documentation", docs);
   if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(KEYS.DOCUMENTATION, JSON.stringify(docs));
+    } catch {
+      // Ignore quota error
+    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
+  pushToCloud("documentation", docs);
 };
 
 export const getStoredSkills = (): SkillItem[] => {
-  return [...initialSkills];
+  if (typeof window === "undefined") return [...initialSkills];
+  try {
+    const data = localStorage.getItem(KEYS.SKILLS);
+    return data ? JSON.parse(data) : [...initialSkills];
+  } catch {
+    return [...initialSkills];
+  }
 };
 
 export const setStoredSkills = (skills: SkillItem[]) => {
   initialSkills.length = 0;
   initialSkills.push(...skills);
-  pushToCloud("skills", skills);
   if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(KEYS.SKILLS, JSON.stringify(skills));
+    } catch {
+      // Ignore quota error
+    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
+  pushToCloud("skills", skills);
 };
 
 export const getStoredSocialLinks = (): SocialLink[] => {
-  return [...initialSocialLinks];
+  if (typeof window === "undefined") return [...initialSocialLinks];
+  try {
+    const data = localStorage.getItem(KEYS.SOCIAL);
+    return data ? JSON.parse(data) : [...initialSocialLinks];
+  } catch {
+    return [...initialSocialLinks];
+  }
 };
 
 export const setStoredSocialLinks = (links: SocialLink[]) => {
   initialSocialLinks.length = 0;
   initialSocialLinks.push(...links);
-  pushToCloud("social", links);
   if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(KEYS.SOCIAL, JSON.stringify(links));
+    } catch {
+      // Ignore quota error
+    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
+  pushToCloud("social", links);
 };
 
 export const getStoredMessages = (): ContactMessage[] => {
-  return [...initialMessages];
+  if (typeof window === "undefined") return [...initialMessages];
+  try {
+    const data = localStorage.getItem(KEYS.MESSAGES);
+    return data ? JSON.parse(data) : [...initialMessages];
+  } catch {
+    return [...initialMessages];
+  }
 };
 
 export const setStoredMessages = (messages: ContactMessage[]) => {
   initialMessages.length = 0;
   initialMessages.push(...messages);
-  pushToCloud("messages", messages);
   if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(KEYS.MESSAGES, JSON.stringify(messages));
+    } catch {
+      // Ignore quota error
+    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
+  pushToCloud("messages", messages);
 };
 
 export const getStoredTimeline = (): TimelineItem[] => {
-  return [...initialTimeline];
+  if (typeof window === "undefined") return [...initialTimeline];
+  try {
+    const data = localStorage.getItem(KEYS.TIMELINE);
+    return data ? JSON.parse(data) : [...initialTimeline];
+  } catch {
+    return [...initialTimeline];
+  }
 };
 
 export const setStoredTimeline = (timeline: TimelineItem[]) => {
   initialTimeline.length = 0;
   initialTimeline.push(...timeline);
-  pushToCloud("timeline", timeline);
   if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(KEYS.TIMELINE, JSON.stringify(timeline));
+    } catch {
+      // Ignore quota error
+    }
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
+  pushToCloud("timeline", timeline);
 };
