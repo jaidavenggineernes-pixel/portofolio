@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -34,8 +35,23 @@ const adminNav = [
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [isReady, setIsReady] = useState(false);
 
   const isLoginPage = pathname === "/admin/login";
+
+  useEffect(() => {
+    if (isLoginPage) {
+      setIsReady(true);
+      return;
+    }
+    
+    import("@/lib/storage").then((mod) => {
+      mod.fetchGlobalData().then(() => {
+        setIsReady(true);
+        window.dispatchEvent(new Event("portfolio-data-changed"));
+      });
+    });
+  }, [isLoginPage]);
 
   const handleLogout = async () => {
     try {
@@ -47,6 +63,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (isLoginPage) {
     return <>{children}</>;
+  }
+
+  if (!isReady) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
+      </div>
+    );
   }
 
   return (
