@@ -9,10 +9,10 @@ import {
   ContactMessage,
 } from "@/types/portfolio";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://bcwpnbwznvcvegdmhnjt.supabase.co";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_lUfwt_xoaValHTyRt1WCYw_bbLrHv0e";
+const supabaseUrl = "https://bcwpnbwznvcvegdmhnjt.supabase.co";
+const supabaseAnonKey = "sb_publishable_lUfwt_xoaValHTyRt1WCYw_bbLrHv0e";
 
-export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
+export const isSupabaseConfigured = true;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
