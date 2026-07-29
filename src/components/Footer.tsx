@@ -105,7 +105,7 @@ export default function Footer() {
         {/* Divider & Copyright */}
         <div className="pt-8 border-t border-slate-200/40 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-1">
-            <span>© {currentYear} JaiAsis (Alif Raditya). All Rights Reserved. Made with</span>
+            <span>© {currentYear} JaiAsis (Alif Jai). All Rights Reserved. Made with</span>
             <Heart size={14} className="text-red-500 fill-red-500 animate-pulse" />
           </div>
 
