@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Share2, Plus, Trash2, Edit3, Save, X, CheckCircle2 } from "lucide-react";
 import { SocialLink } from "@/types/portfolio";
-import { getStoredSocialLinks, await setStoredSocialLinks } from "@/lib/storage";
+import { getStoredSocialLinks, setStoredSocialLinks } from "@/lib/storage";
 
 export default function AdminSocialPage() {
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Trash2, Camera, X } from "lucide-react";
 import { DocumentationItem } from "@/types/portfolio";
-import { getStoredDocumentation, await setStoredDocumentation } from "@/lib/storage";
+import { getStoredDocumentation, setStoredDocumentation } from "@/lib/storage";
 
 export default function AdminDocumentationPage() {
   const [docs, setDocs] = useState<DocumentationItem[]>([]);

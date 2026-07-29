@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Trash2, Edit3, Rocket, X, CheckCircle2 } from "lucide-react";
 import { TimelineItem } from "@/types/portfolio";
-import { getStoredTimeline, await setStoredTimeline } from "@/lib/storage";
+import { getStoredTimeline, setStoredTimeline } from "@/lib/storage";
 
 export default function AdminTimelinePage() {
   const [timeline, setTimeline] = useState<TimelineItem[]>([]);

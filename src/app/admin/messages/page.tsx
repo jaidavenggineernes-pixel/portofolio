@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { MessageSquare, Trash2, Calendar, CheckCircle2 } from "lucide-react";
 import { ContactMessage } from "@/types/portfolio";
-import { getStoredMessages, await setStoredMessages } from "@/lib/storage";
+import { getStoredMessages, setStoredMessages } from "@/lib/storage";
 
 export default function AdminMessagesPage() {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
@@ -12,7 +12,7 @@ export default function AdminMessagesPage() {
     setMessages(getStoredMessages());
   }, []);
 
-  const toggleRead = (id: string) => {
+  const toggleRead = async (id: string) => {
     const updated = messages.map((m) =>
       m.id === id ? { ...m, read: !m.read } : m
     );

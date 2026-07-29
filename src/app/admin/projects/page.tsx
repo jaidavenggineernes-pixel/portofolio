@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Trash2, Edit3, FolderGit2, X, Upload, Image as ImageIcon } from "lucide-react";
 import { ProjectItem } from "@/types/portfolio";
-import { getStoredProjects, await setStoredProjects } from "@/lib/storage";
+import { getStoredProjects, setStoredProjects } from "@/lib/storage";
 
 export default function AdminProjectsPage() {
   const [projects, setProjects] = useState<ProjectItem[]>([]);

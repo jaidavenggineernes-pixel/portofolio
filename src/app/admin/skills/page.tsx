@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Trash2, CheckSquare, X } from "lucide-react";
 import { SkillItem } from "@/types/portfolio";
-import { getStoredSkills, await setStoredSkills } from "@/lib/storage";
+import { getStoredSkills, setStoredSkills } from "@/lib/storage";
 
 export default function AdminSkillsPage() {
   const [skills, setSkills] = useState<SkillItem[]>([]);

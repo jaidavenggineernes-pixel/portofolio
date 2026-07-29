@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Trash2, Award, X } from "lucide-react";
 import { CertificateItem } from "@/types/portfolio";
-import { getStoredCertificates, await setStoredCertificates } from "@/lib/storage";
+import { getStoredCertificates, setStoredCertificates } from "@/lib/storage";
 
 export default function AdminCertificatesPage() {
   const [certs, setCerts] = useState<CertificateItem[]>([]);
