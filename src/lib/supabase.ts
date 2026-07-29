@@ -7,6 +7,8 @@ import {
   SkillItem,
   SocialLink,
   ContactMessage,
+  StatItem,
+  TechStackItem,
 } from "@/types/portfolio";
 
 const supabaseUrl = "https://bcwpnbwznvcvegdmhnjt.supabase.co";
@@ -186,4 +188,26 @@ export const initialMessages: ContactMessage[] = [
     createdAt: "2026-07-22T14:30:00.000Z",
     read: false,
   },
+];
+
+export const initialStats: StatItem[] = [
+  { id: "stat-1", label: "Completed Projects", count: "1+", iconName: "Briefcase", color: "text-cyan-400" },
+  { id: "stat-2", label: "Certificates Earned", count: "10+", iconName: "Award", color: "text-purple-400" },
+  { id: "stat-3", label: "Years Experience", count: "5+", iconName: "Layers", color: "text-blue-400" },
+  { id: "stat-4", label: "Code Quality", count: "99.9%", iconName: "Code2", color: "text-emerald-400" },
+];
+
+export const initialTechStack: TechStackItem[] = [
+  { id: "tech-1", name: "HTML5", category: "Markup", color: "from-orange-500 to-amber-500" },
+  { id: "tech-2", name: "CSS3", category: "Styling", color: "from-blue-500 to-cyan-500" },
+  { id: "tech-3", name: "JavaScript", category: "Language", color: "from-yellow-400 to-amber-500" },
+  { id: "tech-4", name: "TypeScript", category: "Language", color: "from-blue-600 to-cyan-600" },
+  { id: "tech-5", name: "React 19", category: "Frontend", color: "from-cyan-400 to-blue-500" },
+  { id: "tech-6", name: "Next.js 16", category: "Framework", color: "from-slate-700 to-slate-900" },
+  { id: "tech-7", name: "Tailwind CSS", category: "Styling", color: "from-cyan-400 to-teal-400" },
+  { id: "tech-8", name: "Node.js", category: "Runtime", color: "from-emerald-500 to-green-600" },
+  { id: "tech-9", name: "Supabase", category: "Backend/BaaS", color: "from-emerald-400 to-teal-500" },
+  { id: "tech-10", name: "Git", category: "VCS", color: "from-orange-600 to-red-600" },
+  { id: "tech-11", name: "GitHub", category: "Platform", color: "from-purple-600 to-indigo-600" },
+  { id: "tech-12", name: "Figma", category: "Design", color: "from-pink-500 to-purple-500" },
 ];

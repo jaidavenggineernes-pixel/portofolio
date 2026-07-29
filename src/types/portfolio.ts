@@ -64,9 +64,15 @@ export interface TechStackItem {
   id: string;
   name: string;
   category: string;
-  icon: string;
-  level: string;
-  color?: string;
+  color: string;
+}
+
+export interface StatItem {
+  id: string;
+  label: string;
+  count: string;
+  iconName: string;
+  color: string;
 }
 
 export interface SocialLink {

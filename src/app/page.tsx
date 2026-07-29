@@ -17,12 +17,14 @@ import {
   ChevronRight,
   Terminal,
 } from "lucide-react";
-import { getStoredProfile, getStoredProjects, fetchGlobalData } from "@/lib/storage";
-import { ProfileData, ProjectItem } from "@/types/portfolio";
+import * as LucideIcons from "lucide-react";
+import { getStoredProfile, getStoredProjects, getStoredStats, fetchGlobalData } from "@/lib/storage";
+import { ProfileData, ProjectItem, StatItem } from "@/types/portfolio";
 
 export default function Home() {
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [projects, setProjects] = useState<ProjectItem[]>([]);
+  const [stats, setStats] = useState<StatItem[]>([]);
   const [time, setTime] = useState<Date | null>(null);
 
   // Typing effect state
@@ -33,6 +35,7 @@ export default function Home() {
   const loadData = () => {
     setProfile(getStoredProfile());
     setProjects(getStoredProjects());
+    setStats(getStoredStats());
   };
 
   useEffect(() => {
@@ -233,25 +236,29 @@ export default function Home() {
 
       {/* Quick Overview Stats Grid */}
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { icon: Briefcase, count: `${projects.length}+`, label: "Completed Projects", color: "text-cyan-400" },
-          { icon: Award, count: "10+", label: "Certificates Earned", color: "text-purple-400" },
-          { icon: Layers, count: "5+", label: "Years Experience", color: "text-blue-400" },
-          { icon: Code2, count: "99.9%", label: "Code Quality", color: "text-emerald-400" },
-        ].map((stat, index) => (
-          <motion.div
-            key={stat.label}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            className="glass-card p-6 flex flex-col items-center text-center space-y-2"
-          >
-            <stat.icon className={`w-8 h-8 ${stat.color}`} />
-            <span className="text-3xl font-extrabold text-slate-900 dark:text-white">{stat.count}</span>
-            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">{stat.label}</span>
-          </motion.div>
-        ))}
+        {stats.map((stat, index) => {
+          const IconComponent = (LucideIcons as any)[stat.iconName] || LucideIcons.Activity;
+          return (
+            <motion.div
+              key={stat.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="glass-card p-6 flex flex-col items-center text-center space-y-2"
+            >
+              <IconComponent className={`w-8 h-8 ${stat.color}`} />
+              <div className="space-y-1">
+                <h3 className={`text-3xl font-black ${stat.color}`}>
+                  {stat.id === "stat-1" && projects.length > 0 ? `${projects.length}+` : stat.count}
+                </h3>
+                <p className="text-xs sm:text-sm font-semibold text-slate-400">
+                  {stat.label}
+                </p>
+              </div>
+            </motion.div>
+          );
+        })}
       </section>
 
       {/* Featured Projects Highlight */}

@@ -14,22 +14,9 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { ProfileData, SkillItem, TimelineItem } from "@/types/portfolio";
-import { getStoredProfile, getStoredSkills, getStoredTimeline, fetchGlobalData } from "@/lib/storage";
+import { getStoredProfile, getStoredSkills, getStoredTimeline, getStoredTechStack, fetchGlobalData } from "@/lib/storage";
 
-const techStackList = [
-  { name: "HTML5", category: "Markup", color: "from-orange-500 to-amber-500" },
-  { name: "CSS3", category: "Styling", color: "from-blue-500 to-cyan-500" },
-  { name: "JavaScript", category: "Language", color: "from-yellow-400 to-amber-500" },
-  { name: "TypeScript", category: "Language", color: "from-blue-600 to-cyan-600" },
-  { name: "React 19", category: "Frontend", color: "from-cyan-400 to-blue-500" },
-  { name: "Next.js 16", category: "Framework", color: "from-slate-700 to-slate-900" },
-  { name: "Tailwind CSS", category: "Styling", color: "from-cyan-400 to-teal-400" },
-  { name: "Node.js", category: "Runtime", color: "from-emerald-500 to-green-600" },
-  { name: "Supabase", category: "Backend/BaaS", color: "from-emerald-400 to-teal-500" },
-  { name: "Git", category: "VCS", color: "from-orange-600 to-red-600" },
-  { name: "GitHub", category: "Platform", color: "from-purple-600 to-indigo-600" },
-  { name: "Figma", category: "Design", color: "from-pink-500 to-purple-500" },
-];
+
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<ProfileData | null>(null);
@@ -37,12 +24,15 @@ export default function ProfilePage() {
   const [timelineEvents, setTimelineEvents] = useState<TimelineItem[]>([]);
   const [activeSkillCategory, setActiveSkillCategory] = useState<string>("All");
 
+  const [techStack, setTechStack] = useState<any[]>([]);
+
   const skillCategories = ["All", "Frontend", "Backend", "UI Design", "Database", "Editing", "Photography", "AI Tools"];
 
   const loadData = () => {
     setProfile(getStoredProfile());
     setSkills(getStoredSkills());
     setTimelineEvents(getStoredTimeline());
+    setTechStack(getStoredTechStack());
   };
 
   useEffect(() => {
@@ -329,9 +319,9 @@ export default function ProfilePage() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {techStackList.map((item, idx) => (
+          {techStack.map((item, idx) => (
             <motion.div
-              key={item.name}
+              key={item.id}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}

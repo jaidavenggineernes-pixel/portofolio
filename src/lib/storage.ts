@@ -7,6 +7,8 @@ import {
   SocialLink,
   ContactMessage,
   TimelineItem,
+  StatItem,
+  TechStackItem,
 } from "@/types/portfolio";
 import {
   initialProfile,
@@ -16,6 +18,8 @@ import {
   initialSkills,
   initialSocialLinks,
   initialMessages,
+  initialStats,
+  initialTechStack,
 } from "@/lib/supabase";
 
 export const initialTimeline: TimelineItem[] = [
@@ -78,6 +82,8 @@ export const fetchGlobalData = async () => {
       if (data.skills) { initialSkills.length = 0; initialSkills.push(...data.skills); }
       if (data.social) { initialSocialLinks.length = 0; initialSocialLinks.push(...data.social); }
       if (data.timeline) { initialTimeline.length = 0; initialTimeline.push(...data.timeline); }
+      if (data.stats) { initialStats.length = 0; initialStats.push(...data.stats); }
+      if (data.techStack) { initialTechStack.length = 0; initialTechStack.push(...data.techStack); }
     }
   } catch {
     console.error("Failed to fetch global data");
@@ -187,4 +193,30 @@ export const setStoredTimeline = async (timeline: TimelineItem[]) => {
     window.dispatchEvent(new Event("portfolio-data-changed"));
   }
   await pushToCloud("timeline", timeline);
+};
+
+export const getStoredStats = (): StatItem[] => {
+  return [...initialStats];
+};
+
+export const setStoredStats = async (stats: StatItem[]) => {
+  initialStats.length = 0;
+  initialStats.push(...stats);
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("portfolio-data-changed"));
+  }
+  await pushToCloud("stats", stats);
+};
+
+export const getStoredTechStack = (): TechStackItem[] => {
+  return [...initialTechStack];
+};
+
+export const setStoredTechStack = async (techStack: TechStackItem[]) => {
+  initialTechStack.length = 0;
+  initialTechStack.push(...techStack);
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("portfolio-data-changed"));
+  }
+  await pushToCloud("techStack", techStack);
 };
