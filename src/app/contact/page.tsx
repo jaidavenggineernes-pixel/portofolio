@@ -39,7 +39,6 @@ export default function ContactPage() {
   };
 
   useEffect(() => {
-    loadData();
     fetchGlobalData().then(() => loadData());
     const handleDataChange = () => {
       loadData();

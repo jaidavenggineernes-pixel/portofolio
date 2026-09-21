@@ -39,8 +39,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    loadData(); // Load immediately from memory to avoid blank screen
-    fetchGlobalData().then(() => loadData()); // Fetch fresh data in background
+    fetchGlobalData().then(() => loadData());
     const handleDataChange = () => {
       loadData();
     };

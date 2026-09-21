@@ -57,16 +57,18 @@ export async function POST(request: Request) {
     const body = await request.json();
     
     // Fetch current
-    let currentData = { ...fallbackData };
     const { data: fetchRes, error: fetchErr } = await supabase
       .from("portfolio_data")
       .select("data")
       .eq("id", "main_state")
       .single();
     
-    if (!fetchErr && fetchRes && fetchRes.data) {
-      currentData = fetchRes.data;
+    if (fetchErr || !fetchRes || !fetchRes.data) {
+      console.error("Failed to fetch current data during POST:", fetchErr);
+      return NextResponse.json({ success: false, error: "Database sleeping or unreachable. Please try again." }, { status: 503 });
     }
+    
+    let currentData = fetchRes.data;
     
     const updatedData = {
       ...currentData,

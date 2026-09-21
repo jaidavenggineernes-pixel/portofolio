@@ -36,7 +36,6 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
-    loadData(); // Load immediately from memory
     fetchGlobalData().then(() => loadData());
 
     const handleDataChange = () => {
