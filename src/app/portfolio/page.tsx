@@ -47,6 +47,7 @@ export default function PortfolioPage() {
   };
 
   useEffect(() => {
+    loadAllData(); // Load immediately from memory
     fetchGlobalData().then(() => loadAllData());
 
     const handleDataChange = () => {

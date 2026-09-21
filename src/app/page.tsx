@@ -39,7 +39,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchGlobalData().then(() => loadData());
+    loadData(); // Load immediately from memory to avoid blank screen
+    fetchGlobalData().then(() => loadData()); // Fetch fresh data in background
     const handleDataChange = () => {
       loadData();
     };
@@ -88,7 +89,13 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [currentWord, isDeleting, wordIndex, profile]);
 
-  if (!profile) return null;
+  if (!profile) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
+      </div>
+    );
+  }
 
   const formattedTime = time
     ? time.toLocaleTimeString("id-ID", {

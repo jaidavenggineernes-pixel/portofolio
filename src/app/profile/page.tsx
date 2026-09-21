@@ -36,6 +36,7 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
+    loadData(); // Load immediately from memory
     fetchGlobalData().then(() => loadData());
 
     const handleDataChange = () => {
@@ -53,7 +54,13 @@ export default function ProfilePage() {
       ? skills
       : skills.filter((s) => s.category === activeSkillCategory);
 
-  if (!profile) return null;
+  if (!profile) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-16 py-4 sm:py-8">
