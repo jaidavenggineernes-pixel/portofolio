@@ -31,12 +31,24 @@ export async function GET() {
       .single();
     
     if (error || !data) {
-      return NextResponse.json(fallbackData);
+      return NextResponse.json(fallbackData, {
+        headers: {
+          'Cache-Control': 'no-store, max-age=0',
+        },
+      });
     }
     
-    return NextResponse.json(data.data || fallbackData);
+    return NextResponse.json(data.data || fallbackData, {
+      headers: {
+        'Cache-Control': 'no-store, max-age=0',
+      },
+    });
   } catch {
-    return NextResponse.json(fallbackData);
+    return NextResponse.json(fallbackData, {
+      headers: {
+        'Cache-Control': 'no-store, max-age=0',
+      },
+    });
   }
 }
 

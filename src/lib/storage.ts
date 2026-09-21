@@ -72,7 +72,13 @@ const pushToCloud = async (key: string, data: any) => {
 export const fetchGlobalData = async () => {
   if (typeof window === "undefined") return;
   try {
-    const res = await fetch("/api/data", { cache: "no-store" });
+    const res = await fetch("/api/data?t=" + Date.now(), { 
+      cache: "no-store",
+      headers: {
+        'Pragma': 'no-cache',
+        'Cache-Control': 'no-cache'
+      }
+    });
     if (res.ok) {
       const data = await res.json();
       if (data.profile) Object.assign(initialProfile, data.profile);
