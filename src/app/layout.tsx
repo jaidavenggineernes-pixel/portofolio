@@ -37,8 +37,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className="dark scroll-smooth" suppressHydrationWarning>
-      <body className="font-sans antialiased bg-slate-950 text-slate-100 min-h-screen relative">
+    <html lang="id" className="scroll-smooth" suppressHydrationWarning>
+      <body className="font-sans antialiased bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen relative">
         <ThemeProvider>
           {/* Animated Loading Screen */}
           <LoadingScreen />
