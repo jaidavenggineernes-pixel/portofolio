@@ -82,9 +82,6 @@ export default function Footer() {
               <li>
                 <Link href="/contact" className="hover:text-cyan-400 transition-colors">Contact Me</Link>
               </li>
-              <li>
-                <Link href="/admin/login" className="hover:text-cyan-400 text-xs text-slate-500 dark:text-slate-500 transition-colors">Admin Portal</Link>
-              </li>
             </ul>
           </div>
 
